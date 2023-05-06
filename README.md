@@ -1,1 +1,1 @@
-# loja-tiso-producoes
+# loja-tiso-producoes (em desenvolvimento!)
