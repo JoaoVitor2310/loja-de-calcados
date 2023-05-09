@@ -1,9 +1,11 @@
 import express from 'express';
-import products from './data/Products.js';
 import dotenv from 'dotenv'
+
+import products from './data/Products.js';
 import connectDatabse from './config/MongoDb.js';
 import importData from './dataImport.js';
 import productRoutes from './Routes/productRoutes.js';
+import { errorHandler, notFound } from './middlewares/errors.js';
 
 dotenv.config();
 connectDatabse();
@@ -14,10 +16,14 @@ const app = express();
 app.use('/api/import', importData);
 app.use('/api/products', productRoutes);
 
+//Error middlewares
+app.use(notFound);
+app.use(errorHandler);
+
 //Load main products
-app.get('/', (req, res) => {
-    res.send('API!');
-})
+// app.get('/', (req, res) => {
+//     res.send('API!');
+// })
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
