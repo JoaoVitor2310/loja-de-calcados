@@ -3,20 +3,27 @@ import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import Pagination from "./pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { listProduct } from "../../Redux/Actions/ProductActions";
+
+
+import {listProduct} from '../../Redux/services/productsService';
+
+
 import Loading from "../LoadingError/Loading";
 import Message from "../LoadingError/Error";
 
 const ShopSection = (props) => {
-  const { keyword, pagenumber } = props;
   const dispatch = useDispatch();
+  // const { keyword, pagenumber } = props;
 
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, products, page, pages } = productList;
+  const productList = useSelector((state) => state.products);
+  const { loading, error, products } = productList;
+  // const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
-    dispatch(listProduct(keyword, pagenumber));
-  }, [dispatch, keyword, pagenumber]);
+    // dispatch(listProduct(keyword, pagenumber));
+    dispatch(listProduct());
+  }, [dispatch]);
+  // }, [dispatch, keyword, pagenumber]);
   return (
     <>
       <div className="container">
@@ -64,11 +71,11 @@ const ShopSection = (props) => {
                 )}
 
                 {/* Pagination */}
-                <Pagination
+                {/* <Pagination
                   pages={pages}
                   page={page}
                   keyword={keyword ? keyword : ""}
-                />
+                /> */}
               </div>
             </div>
           </div>

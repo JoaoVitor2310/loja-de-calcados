@@ -16,14 +16,15 @@ const app = express();
 app.use('/api/import', importData);
 app.use('/api/products', productRoutes);
 
+app.get('/', (req, res) => {
+    res.send('API!');
+})
+
 //Error middlewares
 app.use(notFound);
 app.use(errorHandler);
 
-//Load main products
-// app.get('/', (req, res) => {
-//     res.send('API!');
-// })
+// Load main products
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
