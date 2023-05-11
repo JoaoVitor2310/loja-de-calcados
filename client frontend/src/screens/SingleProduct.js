@@ -4,59 +4,61 @@ import Rating from "../components/homeComponents/Rating";
 import { Link } from "react-router-dom";
 import Message from "./../components/LoadingError/Error";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createProductReview,
-  listProductDetails,
-} from "../Redux/Actions/ProductActions";
+
+import { productDetails } from "../Redux/slices/productsSlice";
+
+// import {createProductReview, listProductDetails} from "../Redux/Actions/ProductActions";
 import Loading from "../components/LoadingError/Loading";
-import { PRODUCT_CREATE_REVIEW_RESET } from "../Redux/Constants/ProductConstants";
 import moment from "moment";
 
 const SingleProduct = ({ history, match }) => {
-  const [qty, setQty] = useState(1);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
+  // const [qty, setQty] = useState(1);
+  // const [rating, setRating] = useState(0);
+  // const [comment, setComment] = useState("");
 
   const productId = match.params.id;
   const dispatch = useDispatch();
 
-  const productDetails = useSelector((state) => state.productDetails);
+  const productDetails = useSelector((state) => state.product);
   const { loading, error, product } = productDetails;
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-  const productReviewCreate = useSelector((state) => state.productReviewCreate);
-  const {
-    loading: loadingCreateReview,
-    error: errorCreateReview,
-    success: successCreateReview,
-  } = productReviewCreate;
+  // const userLogin = useSelector((state) => state.userLogin);
+  // const { userInfo } = userLogin;
+  // const productReviewCreate = useSelector((state) => state.productReviewCreate);
+  // const {
+  //   loading: loadingCreateReview,
+  //   error: errorCreateReview,
+  //   success: successCreateReview,
+  // } = productReviewCreate;
 
   useEffect(() => {
-    if (successCreateReview) {
-      alert("Review Submitted");
-      setRating(0);
-      setComment("");
-      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
-    }
-    dispatch(listProductDetails(productId));
-  }, [dispatch, productId, successCreateReview]);
+    // if (successCreateReview) {
+    //   alert("Review Submitted");
+    //   setRating(0);
+    //   setComment("");
+    //   dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+    // }
+    dispatch(productDetails(productId));
+  }, [dispatch, productId]);
+  // }, [dispatch, productId, successCreateReview]);
 
-  const AddToCartHandle = (e) => {
-    e.preventDefault();
-    history.push(`/cart/${productId}?qty=${qty}`);
-  };
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      createProductReview(productId, {
-        rating,
-        comment,
-      })
-    );
-  };
+  // const AddToCartHandle = (e) => {
+  //   e.preventDefault();
+  //   history.push(`/cart/${productId}?qty=${qty}`);
+  // };
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   dispatch(
+  //     createProductReview(productId, {
+  //       rating,
+  //       comment,
+  //     })
+  //   );
+  // };
+
+
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="container single-product">
         {loading ? (
           <Loading />
@@ -97,7 +99,7 @@ const SingleProduct = ({ history, match }) => {
                         text={`${product.numReviews} reviews`}
                       />
                     </div>
-                    {product.countInStock > 0 ? (
+                    {/* {product.countInStock > 0 ? (
                       <>
                         <div className="flex-box d-flex justify-content-between align-items-center">
                           <h6>Quantity</h6>
@@ -121,7 +123,7 @@ const SingleProduct = ({ history, match }) => {
                           Add To Cart
                         </button>
                       </>
-                    ) : null}
+                    ) : null} */}
                   </div>
                 </div>
               </div>
