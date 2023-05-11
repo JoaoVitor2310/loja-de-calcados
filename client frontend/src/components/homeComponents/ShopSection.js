@@ -5,7 +5,8 @@ import Pagination from "./pagination";
 import { useDispatch, useSelector } from "react-redux";
 
 
-import {listProduct} from '../../Redux/services/productsService';
+// import {listProduct} from '../../Redux/services/productsService';
+import {productList} from '../../Redux/slices/productsSlice';
 
 
 import Loading from "../LoadingError/Loading";
@@ -15,13 +16,14 @@ const ShopSection = (props) => {
   const dispatch = useDispatch();
   // const { keyword, pagenumber } = props;
 
-  const productList = useSelector((state) => state.products);
-  const { loading, error, products } = productList;
+  const productsData = useSelector((state) => state.products);
+  const { loading, error, products } = productsData;
+  // console.log(productsData);
   // const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
     // dispatch(listProduct(keyword, pagenumber));
-    dispatch(listProduct());
+    dispatch(productList());
   }, [dispatch]);
   // }, [dispatch, keyword, pagenumber]);
   return (
@@ -58,11 +60,11 @@ const ShopSection = (props) => {
                               </Link>
                             </p>
 
-                            <Rating
+                            {/* <Rating
                               value={product.rating}
                               text={`${product.numReviews} reviews`}
-                            />
-                            <h3>${product.price}</h3>
+                            /> */}
+                            {/* <h3>${product.price}</h3> */}
                           </div>
                         </div>
                       </div>

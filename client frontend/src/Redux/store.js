@@ -69,7 +69,7 @@ const store = configureStore({
   reducer: {
     products: productsReducer,
   },
-  preloadedState: initialState,
+  // preloadedState: initialState,
   devTools: composeWithDevTools(applyMiddleware(...middleware))
 });
 
