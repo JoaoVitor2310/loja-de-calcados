@@ -4,15 +4,12 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import productsReducer from "./slices/productsSlice";
-// import productDetails from "./slices/productsSlice";
+import cartReducer from "./slices/cartSlice";
 
 
 import {
   productCreateReviewReducer,
-  // productDetailsReducer,
-  // productListReducer,
 } from "./Reducers/ProductReducers";
-import { cartReducer } from "./Reducers/CartReducers";
 import {
   userDetailsReducer,
   userLoginReducer,
@@ -27,10 +24,8 @@ import {
 } from "./Reducers/OrderReducres";
 
 const reducer = combineReducers({
-  // productList: productListReducer,
-  // productDetails: productDetailsReducer,
   productReviewCreate: productCreateReviewReducer,
-  cart: cartReducer,
+  // cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -46,22 +41,14 @@ const cartItemsFromLocalStorage = localStorage.getItem("cartItems")
   : [];
 
 // login
-const userInfoFromLocalStorage = localStorage.getItem("userInfo")
-  ? JSON.parse(localStorage.getItem("userInfo"))
-  : null;
+// const userInfoFromLocalStorage = localStorage.getItem("userInfo")
+//   ? JSON.parse(localStorage.getItem("userInfo"))
+//   : null;
 
 // shippingAddress
-const shippingAddressFromLocalStorage = localStorage.getItem("shippingAddress")
-  ? JSON.parse(localStorage.getItem("shippingAddress"))
-  : {};
-
-const initialState = {
-  cart: {
-    cartItems: cartItemsFromLocalStorage,
-    shippingAddress: shippingAddressFromLocalStorage,
-  },
-  userLogin: { userInfo: userInfoFromLocalStorage },
-};
+// const shippingAddressFromLocalStorage = localStorage.getItem("shippingAddress")
+//   ? JSON.parse(localStorage.getItem("shippingAddress"))
+//   : {};
 
 const middleware = [thunk];
 
@@ -69,6 +56,7 @@ const middleware = [thunk];
 const store = configureStore({
   reducer: {
     products: productsReducer,
+    cart: cartReducer,
   },
   // preloadedState: initialState,
   devTools: composeWithDevTools(applyMiddleware(...middleware))
