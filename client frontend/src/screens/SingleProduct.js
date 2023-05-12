@@ -7,20 +7,20 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { productDetails } from "../Redux/slices/productsSlice";
 
-// import {createProductReview, listProductDetails} from "../Redux/Actions/ProductActions";
 import Loading from "../components/LoadingError/Loading";
 import moment from "moment";
 
 const SingleProduct = ({ history, match }) => {
-  // const [qty, setQty] = useState(1);
-  // const [rating, setRating] = useState(0);
-  // const [comment, setComment] = useState("");
+  const [qty, setQty] = useState(1);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
 
   const productId = match.params.id;
   const dispatch = useDispatch();
 
-  const productDetails = useSelector((state) => state.product);
-  const { loading, error, product } = productDetails;
+  const productData = useSelector((state) => state.products);
+  const { loading, error, product } = productData;
+  
   // const userLogin = useSelector((state) => state.userLogin);
   // const { userInfo } = userLogin;
   // const productReviewCreate = useSelector((state) => state.productReviewCreate);
@@ -41,10 +41,11 @@ const SingleProduct = ({ history, match }) => {
   }, [dispatch, productId]);
   // }, [dispatch, productId, successCreateReview]);
 
-  // const AddToCartHandle = (e) => {
-  //   e.preventDefault();
-  //   history.push(`/cart/${productId}?qty=${qty}`);
-  // };
+  const AddToCartHandle = (e) => {
+    e.preventDefault();
+    history.push(`/cart/${productId}?qty=${qty}`);
+  };
+
   // const submitHandler = (e) => {
   //   e.preventDefault();
   //   dispatch(
@@ -99,7 +100,7 @@ const SingleProduct = ({ history, match }) => {
                         text={`${product.numReviews} reviews`}
                       />
                     </div>
-                    {/* {product.countInStock > 0 ? (
+                    {product.countInStock > 0 ? (
                       <>
                         <div className="flex-box d-flex justify-content-between align-items-center">
                           <h6>Quantity</h6>
@@ -123,7 +124,7 @@ const SingleProduct = ({ history, match }) => {
                           Add To Cart
                         </button>
                       </>
-                    ) : null} */}
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -133,10 +134,10 @@ const SingleProduct = ({ history, match }) => {
             <div className="row my-5">
               <div className="col-md-6">
                 <h6 className="mb-3">REVIEWS</h6>
-                {product.reviews.length === 0 && (
+                {/* {product.reviews.length === 0 && (
                   <Message variant={"alert-info mt-3"}>No Reviews</Message>
-                )}
-                {product.reviews.map((review) => (
+                )} */}
+                {/* {product.reviews.map((review) => (
                   <div
                     key={review._id}
                     className="mb-5 mb-md-3 bg-light p-3 shadow-sm rounded"
@@ -148,19 +149,19 @@ const SingleProduct = ({ history, match }) => {
                       {review.comment}
                     </div>
                   </div>
-                ))}
+                ))} */}
               </div>
               <div className="col-md-6">
                 <h6>WRITE A CUSTOMER REVIEW</h6>
                 <div className="my-4">
-                  {loadingCreateReview && <Loading />}
+                  {/* {loadingCreateReview && <Loading />}
                   {errorCreateReview && (
                     <Message variant="alert-danger">
                       {errorCreateReview}
                     </Message>
-                  )}
+                  )} */}
                 </div>
-                {userInfo ? (
+                {/* {userInfo ? (
                   <form onSubmit={submitHandler}>
                     <div className="my-4">
                       <strong>Rating</strong>
@@ -205,7 +206,7 @@ const SingleProduct = ({ history, match }) => {
                       to write a review{" "}
                     </Message>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           </>
