@@ -18,7 +18,6 @@ const ShopSection = (props) => {
 
   const productsData = useSelector((state) => state.products);
   const { loading, error, products } = productsData;
-  // console.log(productsData)
   // const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
