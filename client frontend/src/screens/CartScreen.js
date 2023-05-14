@@ -2,14 +2,15 @@ import React, { useEffect } from "react";
 import Header from "./../components/Header";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removefromcart } from "./../Redux/Actions/cartActions";
+
+import {cartAddItem} from '../Redux/slices/cartSlice';
 
 const CartScreen = ({ match, location, history }) => {
   window.scrollTo(0, 0);
   const dispatch = useDispatch();
   const productId = match.params.id;
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
-
+  
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
@@ -17,20 +18,21 @@ const CartScreen = ({ match, location, history }) => {
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty));
+      dispatch(cartAddItem(productId, qty));
     }
   }, [dispatch, productId, qty]);
 
-  const checkOutHandler = () => {
-    history.push("/login?redirect=shipping");
-  };
+  // const checkOutHandler = () => {
+  //   history.push("/login?redirect=shipping");
+  // };
 
-  const removeFromCartHandle = (id) => {
-    dispatch(removefromcart(id));
-  };
+  // const removeFromCartHandle = (id) => {
+  //   dispatch(removefromcart(id));
+  // };
+
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {/* Cart */}
       <div className="container">
         {cartItems.length === 0 ? (
@@ -58,7 +60,7 @@ const CartScreen = ({ match, location, history }) => {
             {cartItems.map((item) => (
               <div className="cart-iterm row">
                 <div
-                  onClick={() => removeFromCartHandle(item.product)}
+                  // onClick={() => removeFromCartHandle(item.product)}
                   className="remove-button d-flex justify-content-center align-items-center"
                 >
                   <i className="fas fa-times"></i>
@@ -75,9 +77,9 @@ const CartScreen = ({ match, location, history }) => {
                   <h6>QUANTITY</h6>
                   <select
                     value={item.qty}
-                    onChange={(e) =>
-                      dispatch(addToCart(item.product, Number(e.target.value)))
-                    }
+                    // onChange={(e) =>
+                    //   dispatch(cartAddItem(item.product, Number(e.target.value)))
+                    // }
                   >
                     {[...Array(item.countInStock).keys()].map((x) => (
                       <option key={x + 1} value={x + 1}>
@@ -105,7 +107,7 @@ const CartScreen = ({ match, location, history }) => {
               </Link>
               {total > 0 && (
                 <div className="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
-                  <button onClick={checkOutHandler}>Checkout</button>
+                  {/* <button onClick={checkOutHandler}>Checkout</button> */}
                 </div>
               )}
             </div>
