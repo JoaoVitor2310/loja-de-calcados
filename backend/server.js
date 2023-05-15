@@ -7,11 +7,13 @@ import connectDatabse from './config/MongoDb.js';
 import importData from './dataImport.js';
 import productRoutes from './Routes/productRoutes.js';
 import { errorHandler, notFound } from './middlewares/errors.js';
+import userRoutes from './Routes/userRoutes.js';
 
 dotenv.config();
 connectDatabse();
 
 const app = express();
+app.use(express.json());
 
 //CORS
 app.use(cors());
@@ -19,6 +21,7 @@ app.use(cors());
 //Api
 app.use('/api/import', importData);
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
     res.send('API!');
