@@ -5,13 +5,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import productsReducer from "./slices/productsSlice";
 import cartReducer from "./slices/cartSlice";
+import userReducer from "./slices/userSlice";
 
 import {
   productCreateReviewReducer,
 } from "./Reducers/ProductReducers";
 import {
   userDetailsReducer,
-  userLoginReducer,
   userRegisterReducer,
   userUpdateProfileReducer,
 } from "./Reducers/userReducers";
@@ -24,7 +24,7 @@ import {
 
 const reducer = combineReducers({
   productReviewCreate: productCreateReviewReducer,
-  userLogin: userLoginReducer,
+  // userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
@@ -33,12 +33,6 @@ const reducer = combineReducers({
   orderPay: orderPayReducer,
   orderListMy: orderListMyReducer,
 });
-
-
-// login
-// const userInfoFromLocalStorage = localStorage.getItem("userInfo")
-//   ? JSON.parse(localStorage.getItem("userInfo"))
-//   : null;
 
 // shippingAddress
 // const shippingAddressFromLocalStorage = localStorage.getItem("shippingAddress")
@@ -51,6 +45,7 @@ const store = configureStore({
   reducer: {
     products: productsReducer,
     cart: cartReducer,
+    user: userReducer,
   },
   // preloadedState: initialState,
   devTools: composeWithDevTools(applyMiddleware(...middleware))

@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import Message from "../components/LoadingError/Error";
 import Loading from "../components/LoadingError/Loading";
 import Header from "./../components/Header";
-import { login } from "./../Redux/Actions/userActions";
+
+import { userLogin } from "../Redux/slices/userSlice";
 
 const Login = ({ location, history }) => {
   window.scrollTo(0, 0);
@@ -13,24 +14,26 @@ const Login = ({ location, history }) => {
 
   const dispatch = useDispatch();
   const redirect = location.search ? location.search.split("=")[1] : "/";
+  
+  const userLoginState = useSelector((state) => state.user);
+  const { error, loading, userInfo } = userLoginState;
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { error, loading, userInfo } = userLogin;
-
-  useEffect(() => {
-    if (userInfo) {
-      history.push(redirect);
-    }
-  }, [userInfo, history, redirect]);
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     console.log(userInfo);
+  //     history.push(redirect);
+  //   }
+  // }, [userInfo, history, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
+    const loginInfo = {email, password}
+    dispatch(userLogin(loginInfo));
   };
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="container d-flex flex-column justify-content-center align-items-center login-center">
         {error && <Message variant="alert-danger">{error}</Message>}
         {loading && <Loading />}
@@ -55,7 +58,7 @@ const Login = ({ location, history }) => {
             <Link
               to={redirect ? `/register?redirect=${redirect}` : "/register"}
             >
-              Create Account
+              Criar conta
             </Link>
           </p>
         </form>
