@@ -38,7 +38,10 @@ const CartScreen = ({ match, location, history }) => {
   };
 
   const removeFromCartHandle = (id) => {
-    dispatch(cartRemoveItem(id));
+    const confirmation =  window.confirm('Deseja excluir esse item?');
+    if(confirmation){
+      dispatch(cartRemoveItem(id));
+    }
   };
 
   return (
