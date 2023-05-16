@@ -18,12 +18,12 @@ const Login = ({ location, history }) => {
   const userLoginState = useSelector((state) => state.user);
   const { error, loading, userInfo } = userLoginState;
 
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     console.log(userInfo);
-  //     history.push(redirect);
-  //   }
-  // }, [userInfo, history, redirect]);
+  useEffect(() => {
+    console.log(userInfo);
+    if (userInfo !== {}) {
+      history.push(redirect);
+    }
+  }, [userInfo, history, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();

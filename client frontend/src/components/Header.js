@@ -10,7 +10,7 @@ const Header = () => {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  const userLogin = useSelector((state) => state.userLogin);
+  const userLogin = useSelector((state) => state.user);
   const { userInfo } = userLogin;
 
   const logoutHandler = () => {
@@ -110,7 +110,7 @@ const Header = () => {
                         </Link>
 
                         <Link className="dropdown-item" to="/register">
-                          Register
+                          Cadastre-se
                         </Link>
                       </div>
                     </div>
@@ -187,7 +187,7 @@ const Header = () => {
                   </div>
                 ) : (
                   <>
-                    <Link to="/register">Register</Link>
+                    <Link to="/register">Cadastre-se</Link>
                     <Link to="/login">Login</Link>
                   </>
                 )}
