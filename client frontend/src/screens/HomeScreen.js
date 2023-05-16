@@ -11,7 +11,7 @@ const HomeScreen = ({ match }) => {
   // const pagenumber = match.params.pagenumber;
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       <ShopSection />
       {/* <ShopSection keyword={keyword} pagenumber={pagenumber} /> */}
       {/* <CalltoActionSection /> */}

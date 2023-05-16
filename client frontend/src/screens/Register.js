@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 import Message from "../components/LoadingError/Error";
 import Loading from "../components/LoadingError/Loading";
-import { register } from "../Redux/Actions/userActions";
 import Header from "./../components/Header";
+
+import { userRegister } from "../Redux/slices/userSlice";
 
 const Register = ({ location, history }) => {
   window.scrollTo(0, 0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
-  const userRegister = useSelector((state) => state.userRegister);
-  const { error, loading, userInfo } = userRegister;
+  const userRegisterState = useSelector((state) => state.user);
+  const { error, loading, userInfo } = userRegisterState;
 
   useEffect(() => {
     if (userInfo) {
@@ -26,7 +29,10 @@ const Register = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+    const registerInfo = {
+      name, email, password, confirmPassword
+    }
+    dispatch(userRegister(registerInfo));
   };
 
   return (
@@ -42,7 +48,7 @@ const Register = ({ location, history }) => {
         >
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Nome"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -54,9 +60,15 @@ const Register = ({ location, history }) => {
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Confirme a senha"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
           <button type="submit">Register</button>

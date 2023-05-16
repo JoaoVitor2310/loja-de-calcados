@@ -19,8 +19,7 @@ const Login = ({ location, history }) => {
   const { error, loading, userInfo } = userLoginState;
 
   useEffect(() => {
-    console.log(userInfo);
-    if (userInfo !== {}) {
+    if (userInfo !== null) {
       history.push(redirect);
     }
   }, [userInfo, history, redirect]);
@@ -33,7 +32,7 @@ const Login = ({ location, history }) => {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <div className="container d-flex flex-column justify-content-center align-items-center login-center">
         {error && <Message variant="alert-danger">{error}</Message>}
         {loading && <Loading />}

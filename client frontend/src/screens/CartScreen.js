@@ -46,7 +46,7 @@ const CartScreen = ({ match, location, history }) => {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       {/* Cart */}
       <div className="container">
         {cartItems.length === 0 ? (

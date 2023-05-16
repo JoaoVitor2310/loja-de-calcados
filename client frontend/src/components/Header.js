@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../Redux/Actions/userActions";
+
+import { userLogout } from "../Redux/slices/userSlice";
 
 const Header = () => {
   const [keyword, setKeyword] = useState();
+  let [userFirstName, setUserFirstName] = useState();
   const dispatch = useDispatch();
   let history = useHistory();
 
@@ -12,9 +14,18 @@ const Header = () => {
   const { cartItems } = cart;
   const userLogin = useSelector((state) => state.user);
   const { userInfo } = userLogin;
+  
+  useEffect(() => {
+    if(userInfo){
+      setUserFirstName(userInfo.name.split(' ')[0]);
+    }
+  },[userInfo])
 
   const logoutHandler = () => {
-    dispatch(logout());
+    const confirmation = window.confirm('Deseja deslogar?');
+    if (confirmation) {
+      dispatch(userLogout());
+    }
   };
 
   const submitHandler = (e) => {
@@ -77,11 +88,11 @@ const Header = () => {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        <i class="fas fa-user"></i>
+                        <i className="fas fa-user"></i>
                       </button>
                       <div className="dropdown-menu">
                         <Link className="dropdown-item" to="/profile">
-                          Profile
+                          Perfil
                         </Link>
 
                         <Link
@@ -102,7 +113,7 @@ const Header = () => {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        <i class="fas fa-user"></i>
+                        <i name="fas fa-user"></i>
                       </button>
                       <div className="dropdown-menu">
                         <Link className="dropdown-item" to="/login">
@@ -130,7 +141,7 @@ const Header = () => {
                       onChange={(e) => setKeyword(e.target.value)}
                     />
                     <button type="submit" className="search-button">
-                      search
+                      Pesquisar
                     </button>
                   </form>
                 </div>
@@ -161,35 +172,35 @@ const Header = () => {
               </div>
               <div className="col-md-3 d-flex align-items-center justify-content-end Login-Register">
                 {userInfo ? (
-                  <div className="btn-group">
-                    <button
-                      type="button"
-                      className="name-button dropdown-toggle"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Hi, {userInfo.name}
-                    </button>
-                    <div className="dropdown-menu">
-                      <Link className="dropdown-item" to="/profile">
-                        Profile
-                      </Link>
+                <div className="btn-group">
+                  <button
+                    type="button"
+                    className="name-button dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Olá, {userFirstName}
+                  </button>
+                  <div className="dropdown-menu">
+                    <Link className="dropdown-item" to="/profile">
+                      Profile
+                    </Link>
 
-                      <Link
-                        className="dropdown-item"
-                        to="#"
-                        onClick={logoutHandler}
-                      >
-                        Logout
-                      </Link>
-                    </div>
+                    <Link
+                      className="dropdown-item"
+                      to="#"
+                      onClick={logoutHandler}
+                    >
+                      Logout
+                    </Link>
                   </div>
+                </div>
                 ) : (
-                  <>
-                    <Link to="/register">Cadastre-se</Link>
-                    <Link to="/login">Login</Link>
-                  </>
+                <>
+                  <Link to="/register">Cadastre-se</Link>
+                  <Link to="/login">Login</Link>
+                </>
                 )}
 
                 <Link to="/cart">

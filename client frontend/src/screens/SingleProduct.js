@@ -59,7 +59,7 @@ const SingleProduct = ({ history, match }) => {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <div className="container single-product">
         {loading ? (
           <Loading />
