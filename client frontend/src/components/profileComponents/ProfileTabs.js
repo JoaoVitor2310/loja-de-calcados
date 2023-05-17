@@ -4,7 +4,8 @@ import Message from "../LoadingError/Error";
 import Toast from "./../LoadingError/Toast";
 import Loading from "./../LoadingError/Loading";
 import { toast } from "react-toastify";
-import { updateUserProfile } from "../../Redux/Actions/userActions";
+
+import { userUpdate } from "../../Redux/slices/userSlice";
 
 const ProfileTabs = () => {
   const [name, setName] = useState("");
@@ -17,38 +18,54 @@ const ProfileTabs = () => {
     pauseOnFocusLoss: false,
     draggable: false,
     pauseOnHover: false,
-    autoClose: 2000,
+    autoClose: 3000,
   };
 
   const dispatch = useDispatch();
 
-  const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, user } = userDetails;
+  const userDetails = useSelector((state) => state.user);
+  const { loading, error, userInfo } = userDetails;
 
-  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
-  const { loading: updateLoading } = userUpdateProfile;
+  // const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const updateLoading = false;
+  // const { loading: updateLoading } = userUpdateProfile;
 
   useEffect(() => {
-    if (user) {
-      setName(user.name);
-      setEmail(user.email);
+    if (userInfo) {
+      setName(userInfo.name);
+      setEmail(userInfo.email);
     }
-  }, [dispatch, user]);
+  }, [dispatch, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // Password match
-    if (password !== confirmPassword) {
-      if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.error("Password does not match", Toastobjects);
-      }
-    } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
-      if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.success("Profile Updated", Toastobjects);
+    let newProfile = { token: userInfo.token };
+
+    if (name !== userInfo.name) {
+      newProfile.name = name;
+      dispatch(userUpdate(newProfile));
+      console.log(name)
+      console.log(userInfo.name)
+      toastId.current = toast.success("Perfil atualizado", Toastobjects);
+    }
+
+    if (password !== '') {
+
+      if (password !== confirmPassword) {
+        toastId.current = toast.error("As senhas não são iguais", Toastobjects);
+      } else {
+        newProfile.password = password;
+        newProfile.confirmPassword = confirmPassword;
+        dispatch(userUpdate(newProfile));
+        if (!error) {
+          console.log(error)
+          toastId.current = toast.success("Perfil atualizado", Toastobjects);
+        }
       }
     }
+    console.log(newProfile);
   };
+
   return (
     <>
       <Toast />
@@ -58,7 +75,7 @@ const ProfileTabs = () => {
       <form className="row  form-container" onSubmit={submitHandler}>
         <div className="col-md-6">
           <div className="form">
-            <label for="account-fn">UserName</label>
+            <label htmlFor="account-fn">Nome</label>
             <input
               className="form-control"
               type="text"
@@ -71,19 +88,20 @@ const ProfileTabs = () => {
 
         <div className="col-md-6">
           <div className="form">
-            <label for="account-email">E-mail Address</label>
+            <label htmlFor="account-email">E-mail</label>
             <input
               className="form-control"
               type="email"
               value={email}
               required
+              disabled
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>
         <div className="col-md-6">
           <div className="form">
-            <label for="account-pass">New Password</label>
+            <label htmlFor="account-pass">Senha</label>
             <input
               className="form-control"
               type="password"
@@ -94,7 +112,7 @@ const ProfileTabs = () => {
         </div>
         <div className="col-md-6">
           <div className="form">
-            <label for="account-confirm-pass">Confirm Password</label>
+            <label htmlFor="account-confirm-pass">Confirme a senha</label>
             <input
               className="form-control"
               type="password"
@@ -103,7 +121,7 @@ const ProfileTabs = () => {
             />
           </div>
         </div>
-        <button type="submit">Update Profile</button>
+        <button type="submit">Atualizar perfil</button>
       </form>
     </>
   );

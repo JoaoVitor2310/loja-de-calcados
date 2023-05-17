@@ -22,8 +22,6 @@ import {
 
 const reducer = combineReducers({
   productReviewCreate: productCreateReviewReducer,
-  // userDetails: userDetailsReducer,
-  userUpdateProfile: userUpdateProfileReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
