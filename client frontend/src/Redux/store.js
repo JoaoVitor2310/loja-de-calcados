@@ -7,12 +7,7 @@ import productsReducer from "./slices/productsSlice";
 import cartReducer from "./slices/cartSlice";
 import userReducer from "./slices/userSlice";
 
-import {
-  productCreateReviewReducer,
-} from "./Reducers/ProductReducers";
-import {
-  userUpdateProfileReducer,
-} from "./Reducers/userReducers";
+import {productCreateReviewReducer,} from "./Reducers/ProductReducers";
 import {
   orderCreateReducer,
   orderDetailsReducer,

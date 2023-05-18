@@ -11,7 +11,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const userLogin = useSelector((state) => state.userLogin);
+  const userLogin = useSelector((state) => state.user);
   const { userInfo } = userLogin;
 
   // Calculate Price
@@ -87,8 +87,8 @@ const PlaceOrderScreen = ({ history }) => {
                 <h5>
                   <strong>Order info</strong>
                 </h5>
-                <p>Shipping: {cart.shippingAddress.country}</p>
-                <p>Pay method: {cart.paymentMethod}</p>
+                <p>Endereço: {cart.shippingAddress.country}</p>
+                <p>Forma de pagamento: {cart.paymentMethod}</p>
               </div>
             </div>
           </div>
@@ -102,12 +102,12 @@ const PlaceOrderScreen = ({ history }) => {
               </div>
               <div className="col-md-8 center">
                 <h5>
-                  <strong>Deliver to</strong>
+                  <strong>Entrega em:</strong>
                 </h5>
                 <p>
-                  Address: {cart.shippingAddress.city},{" "}
+                  Endereço: {cart.shippingAddress.city},{" "}
                   {cart.shippingAddress.address},{" "}
-                  {cart.shippingAddress.postalCode}
+                  {cart.shippingAddress.CEP}
                 </p>
               </div>
             </div>
@@ -117,7 +117,7 @@ const PlaceOrderScreen = ({ history }) => {
         <div className="row order-products justify-content-between">
           <div className="col-lg-8">
             {cart.cartItems.length === 0 ? (
-              <Message variant="alert-info mt-5">Your cart is empty</Message>
+              <Message variant="alert-info mt-5">Seu carrinho está vazio</Message>
             ) : (
               <>
                 {cart.cartItems.map((item, index) => (
@@ -131,11 +131,11 @@ const PlaceOrderScreen = ({ history }) => {
                       </Link>
                     </div>
                     <div className="mt-3 mt-md-0 col-md-2 col-6  d-flex align-items-center flex-column justify-content-center ">
-                      <h4>QUANTITY</h4>
+                      <h4>QUANTIDADE</h4>
                       <h6>{item.qty}</h6>
                     </div>
                     <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
-                      <h4>SUBTOTAL</h4>
+                      <h4>TOTAL</h4>
                       <h6>${item.qty * item.price}</h6>
                     </div>
                   </div>

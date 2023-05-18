@@ -43,23 +43,23 @@ const Header = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-6 d-flex align-items-center display-none">
-              <p>+255 768 356 890</p>
-              <p>info@zpunet.com</p>
+              <p>(21) 2222-3333</p>
+              <p>email@tiso.com</p>
             </div>
             <div className=" col-12 col-lg-6 justify-content-center justify-content-lg-end d-flex align-items-center">
-              <Link to="">
+              <Link to="facebook.com">
                 <i className="fab fa-facebook-f"></i>
               </Link>
-              <Link to="">
+              <Link to="instagram.com">
                 <i className="fab fa-instagram"></i>
               </Link>
-              <Link to="">
+              <Link to="linkedin.com">
                 <i className="fab fa-linkedin-in"></i>
               </Link>
-              <Link to="">
+              <Link to="www.youtube.com">
                 <i className="fab fa-youtube"></i>
               </Link>
-              <Link to="">
+              <Link to="pinterest">
                 <i className="fab fa-pinterest-p"></i>
               </Link>
             </div>
@@ -162,11 +162,11 @@ const Header = () => {
                   <input
                     type="search"
                     className="form-control rounded search"
-                    placeholder="Search"
+                    placeholder="Pesquisar"
                     onChange={(e) => setKeyword(e.target.value)}
                   />
                   <button type="submit" className="search-button">
-                    search
+                    pesquisar
                   </button>
                 </form>
               </div>
@@ -198,8 +198,8 @@ const Header = () => {
                 </div>
                 ) : (
                 <>
-                  <Link to="/register">Cadastre-se</Link>
                   <Link to="/login">Login</Link>
+                  <Link to="/register">Cadastrar</Link>
                 </>
                 )}
 

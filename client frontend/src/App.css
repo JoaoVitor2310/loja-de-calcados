@@ -589,9 +589,12 @@ textarea:focus {
 .radio-container {
   padding: 10px 0;
   text-align: start;
+  display: flex;
+  flex-direction: column;
 }
 .radio-container input {
   font-size: 17px;
+  margin-bottom: 10px;
 }
 .radio-container label {
   padding: 0 20px;

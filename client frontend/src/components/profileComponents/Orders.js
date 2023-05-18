@@ -23,7 +23,7 @@ const Orders = (props) => {
                   fontSize: "12px",
                 }}
               >
-                START SHOPPING
+                COMECE A COMPRAR
               </Link>
             </div>
           ) : (

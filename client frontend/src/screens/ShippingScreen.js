@@ -8,7 +8,6 @@ const ShippingScreen = ({ history }) => {
   window.scrollTo(0, 0);
 
   const cart = useSelector((state) => state.cart);
-  const { shippingAddress } = cart;
 
   const [street, setStreet] = useState('');
   const [number, setNumber] = useState('');
@@ -23,7 +22,6 @@ const ShippingScreen = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     const fullAddress = {street, number, complement, neighborhood, city, CEP, country};
-    console.log(fullAddress);
     dispatch(saveShippingAddress(fullAddress));
     history.push("/payment");
   };
