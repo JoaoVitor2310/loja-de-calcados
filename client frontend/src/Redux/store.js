@@ -28,11 +28,6 @@ const reducer = combineReducers({
   orderListMy: orderListMyReducer,
 });
 
-// shippingAddress
-// const shippingAddressFromLocalStorage = localStorage.getItem("shippingAddress")
-//   ? JSON.parse(localStorage.getItem("shippingAddress"))
-//   : {};
-
 const middleware = [thunk];
 
 const store = configureStore({

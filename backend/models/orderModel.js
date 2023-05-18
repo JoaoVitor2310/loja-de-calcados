@@ -20,13 +20,20 @@ const orderSchema = mongoose.Schema({
         }
     ],
     shippingAddress: {
-        address: {type: String, required: true},
+        name: {type: String, required: true},
+        street: {type: String, required: true},
+        number: {type: String, required: true},
+        complement: {type: String, required: true},
+        neighborhood: {type: String, required: true},
         city: {type: String, required: true},
         CEP: {type: String, required: true},
         country: {type: String, required: true},
     },
     paymentAddress: {
-        address: {type: String, required: true},
+        street: {type: String, required: true},
+        number: {type: String, required: true},
+        complement: {type: String, required: true},
+        neighborhood: {type: String, required: true},
         city: {type: String, required: true},
         CEP: {type: String, required: true},
         country: {type: String, required: true},
