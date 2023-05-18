@@ -24,17 +24,17 @@ const ProfileTabs = () => {
   const dispatch = useDispatch();
 
   const userDetails = useSelector((state) => state.user);
-  const { loading, error, userInfo } = userDetails;
-
-  // const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
-  const updateLoading = false;
-  // const { loading: updateLoading } = userUpdateProfile;
+  const { loading, error, userInfo, success } = userDetails;
 
   useEffect(() => {
     if (userInfo) {
       setName(userInfo.name);
       setEmail(userInfo.email);
     }
+
+        if (success) {
+          toastId.current = toast.success("Perfil atualizado", Toastobjects);
+        }
   }, [dispatch, userInfo]);
 
   const submitHandler = (e) => {
@@ -44,34 +44,20 @@ const ProfileTabs = () => {
     if (name !== userInfo.name) {
       newProfile.name = name;
       dispatch(userUpdate(newProfile));
-      console.log(name)
-      console.log(userInfo.name)
-      toastId.current = toast.success("Perfil atualizado", Toastobjects);
     }
 
-    if (password !== '') {
-
-      if (password !== confirmPassword) {
-        toastId.current = toast.error("As senhas não são iguais", Toastobjects);
-      } else {
+    if (password !== '' || confirmPassword !== '') {
         newProfile.password = password;
         newProfile.confirmPassword = confirmPassword;
         dispatch(userUpdate(newProfile));
-        if (!error) {
-          console.log(error)
-          toastId.current = toast.success("Perfil atualizado", Toastobjects);
-        }
-      }
     }
-    console.log(newProfile);
   };
 
   return (
     <>
       <Toast />
-      {error && <Message variant="alert-danger">{error}</Message>}
+      {error &&   <Message variant="alert-danger">{error}</Message>}
       {loading && <Loading />}
-      {updateLoading && <Loading />}
       <form className="row  form-container" onSubmit={submitHandler}>
         <div className="col-md-6">
           <div className="form">
