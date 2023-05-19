@@ -6,10 +6,10 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import productsReducer from "./slices/productsSlice";
 import cartReducer from "./slices/cartSlice";
 import userReducer from "./slices/userSlice";
+import orderReducer from "./slices/orderSlice";
 
 import {productCreateReviewReducer,} from "./Reducers/ProductReducers";
 import {
-  orderCreateReducer,
   orderDetailsReducer,
   orderListMyReducer,
   orderPayReducer,
@@ -17,7 +17,7 @@ import {
 
 const reducer = combineReducers({
   productReviewCreate: productCreateReviewReducer,
-  orderCreate: orderCreateReducer,
+  // orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   orderListMy: orderListMyReducer,
@@ -30,6 +30,7 @@ const store = configureStore({
     products: productsReducer,
     cart: cartReducer,
     user: userReducer,
+    order: orderPayReducer,
   },
   // preloadedState: initialState,
   devTools: composeWithDevTools(applyMiddleware(...middleware))

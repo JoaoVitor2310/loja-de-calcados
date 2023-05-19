@@ -8,6 +8,7 @@ import importData from './dataImport.js';
 import productRoutes from './Routes/productRoutes.js';
 import { errorHandler, notFound } from './middlewares/errors.js';
 import userRoutes from './Routes/userRoutes.js';
+import orderRoutes from './Routes/orderRoutes.js';
 
 dotenv.config();
 connectDatabse();
@@ -22,6 +23,7 @@ app.use(cors());
 app.use('/api/import', importData);
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
 app.get('/', (req, res) => {
     res.send('API!');
