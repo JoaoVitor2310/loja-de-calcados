@@ -20,7 +20,6 @@ const orderSchema = mongoose.Schema({
         }
     ],
     shippingAddress: {
-        name: {type: String, required: true},
         street: {type: String, required: true},
         number: {type: String, required: true},
         complement: {type: String, required: true},
@@ -29,15 +28,15 @@ const orderSchema = mongoose.Schema({
         CEP: {type: String, required: true},
         country: {type: String, required: true},
     },
-    paymentAddress: {
-        street: {type: String, required: true},
-        number: {type: String, required: true},
-        complement: {type: String, required: true},
-        neighborhood: {type: String, required: true},
-        city: {type: String, required: true},
-        CEP: {type: String, required: true},
-        country: {type: String, required: true},
-    },
+    // paymentAddress: {
+    //     street: {type: String, required: true},
+    //     number: {type: String, required: true},
+    //     complement: {type: String, required: true},
+    //     neighborhood: {type: String, required: true},
+    //     city: {type: String, required: true},
+    //     CEP: {type: String, required: true},
+    //     country: {type: String, required: true},
+    // },
     paymentMethod: {
         type: String,
         required: true,

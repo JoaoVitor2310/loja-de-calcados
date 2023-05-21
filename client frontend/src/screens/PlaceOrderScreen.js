@@ -34,9 +34,10 @@ const PlaceOrderScreen = ({ history }) => {
       Number(taxPrice)
     ).toFixed(2);
 
-    const pricesInfo = {itemsPrice, shippingPrice, taxPrice};
+    // const pricesInfo = {itemsPrice, shippingPrice, taxPrice};
 
   useEffect(() => {
+    //Dispatch de preços no carrinho? Por enquanto não precisa
     if (success) {
       history.push(`/order/${order._id}`);
     }
@@ -48,11 +49,13 @@ const PlaceOrderScreen = ({ history }) => {
       orderItems: cart.cartItems,
       shippingAddress: cart.shippingAddress,
       paymentMethod: cart.paymentMethod,
-      itemsPrice: pricesInfo.itemsPrice,
-      shippingPrice: pricesInfo.shippingPrice,
-      taxPrice: pricesInfo.taxPrice,
-      totalPrice: pricesInfo.totalPrice,
+      itemsPrice: itemsPrice,
+      shippingPrice: shippingPrice,
+      taxPrice: taxPrice,
+      totalPrice: totalPrice,
+      paymentMethod: cart.paymentMethod
     };
+    // console.log(orderInfo)
     dispatch(createOrder(orderInfo));
   };
 
