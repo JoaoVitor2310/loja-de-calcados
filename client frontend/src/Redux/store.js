@@ -10,16 +10,11 @@ import orderReducer from "./slices/orderSlice";
 
 import {productCreateReviewReducer,} from "./Reducers/ProductReducers";
 import {
-  orderDetailsReducer,
   orderListMyReducer,
-  orderPayReducer,
 } from "./Reducers/OrderReducres";
 
 const reducer = combineReducers({
   productReviewCreate: productCreateReviewReducer,
-  // orderCreate: orderCreateReducer,
-  orderDetails: orderDetailsReducer,
-  orderPay: orderPayReducer,
   orderListMy: orderListMyReducer,
 });
 
@@ -30,7 +25,7 @@ const store = configureStore({
     products: productsReducer,
     cart: cartReducer,
     user: userReducer,
-    order: orderPayReducer,
+    order: orderReducer,
   },
   // preloadedState: initialState,
   devTools: composeWithDevTools(applyMiddleware(...middleware))

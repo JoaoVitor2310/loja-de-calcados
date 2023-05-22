@@ -55,7 +55,6 @@ const PlaceOrderScreen = ({ history }) => {
       totalPrice: totalPrice,
       paymentMethod: cart.paymentMethod
     };
-    // console.log(orderInfo)
     dispatch(createOrder(orderInfo));
   };
 

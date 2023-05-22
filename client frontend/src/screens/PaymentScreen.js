@@ -37,7 +37,7 @@ const PaymentScreen = ({ history }) => {
                   className="form-check-input"
                   type="radio"
                   value='credit'
-                  name="payment"
+                  name="payment" // Esse nome garante que só irá poder selecionar um.
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
                 <label className="form-check-label">Cartão de crédito</label>
@@ -52,7 +52,6 @@ const PaymentScreen = ({ history }) => {
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
                 <label className="form-check-label">Pix</label>
-
               </div>
               <div>
                 <input
@@ -63,7 +62,17 @@ const PaymentScreen = ({ history }) => {
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
                 <label className="form-check-label">Boleto</label>
+              </div>
 
+              <div>
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  value='paypal'
+                  name="payment"
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                <label className="form-check-label">Paypal</label>
               </div>
 
             </div>

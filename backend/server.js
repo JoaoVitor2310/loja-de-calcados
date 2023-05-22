@@ -24,6 +24,9 @@ app.use('/api/import', importData);
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/config/paypal', (req, res) => {
+    res.send(process.env.PAYPAL_CLIENT)
+});
 
 app.get('/', (req, res) => {
     res.send('API!');
