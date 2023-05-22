@@ -15,42 +15,41 @@ const OrderScreen = ({ match }) => {
   const dispatch = useDispatch();
   const [sdkReady, setSdkReady] = useState(false);
   const orderId = match.params.id;
+  const token = JSON.parse(localStorage.getItem("userInfoLocal")).token;
 
   const orderState = useSelector((state) => state.order);
   const { order, loading, error, success } = orderState;
 
+  useEffect(() => { // Loads info from order
+    const tokenId = { orderId, token };
+    dispatch(orderDetails(tokenId));
+  }, [])
+
+
   if (!loading) {
-    const addDecimals = (num) => {
+    var addDecimals = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2);
     };
 
-    // var itemsPrice = addDecimals(
-    //   order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
-    // );
-    var itemsPrice = 100;
-    console.log(order.orderItems);
-
+    var itemsPrice = addDecimals(
+      order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+    );
   }
 
-  useEffect(() => {
+  useEffect(async () => {
+    const api = process.env.REACT_APP_API_URL;
     const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal");
+      const { data: clientId } = await axios.get(`${api}/config/paypal`);
       const script = document.createElement("script");
       script.type = "text/javascript";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=BRL`;
       script.async = true;
       script.onload = () => {
         setSdkReady(true);
       };
       document.body.appendChild(script);
     };
-    if (!order || success) {
-      
-      const token = localStorage.getItem("shippingAddress").token;
-      const tokenId = { id: orderId, token};
-      console.log(tokenId);
-      dispatch(orderDetails(tokenId));
-    } else if (!order.isPaid) {
+    if (!order.isPaid) {
       if (!window.paypal) {
         addPayPalScript();
       } else {
@@ -60,15 +59,14 @@ const OrderScreen = ({ match }) => {
   }, [dispatch, orderId, success, order]);
 
   const successPaymentHandler = (paymentResult) => {
-    const token = localStorage.getItem("userInfoLocal").token;
-    const orderInfo = {orderId, paymentResult, token}
-    console.log(paymentResult);
+    const orderInfo = { orderId, paymentResult, token }
     dispatch(orderPay(orderInfo));
   };
 
   return (
     <>
       <Header />
+      {/* COMEÇA */}
       <div className="container">
         {loading ? (
           <Loading />
@@ -86,7 +84,7 @@ const OrderScreen = ({ match }) => {
                   </div>
                   <div className="col-md-8 center">
                     <h5>
-                      <strong>Customer</strong>
+                      <strong>Usuário</strong>
                     </h5>
                     <p>{order.user.name}</p>
                     <p>
@@ -120,7 +118,7 @@ const OrderScreen = ({ match }) => {
                     ) : (
                       <div className="bg-danger p-2 col-12">
                         <p className="text-white text-center text-sm-start">
-                          Ainda não foi pago
+                          Aguardando pagamento
                         </p>
                       </div>
                     )}
@@ -153,7 +151,7 @@ const OrderScreen = ({ match }) => {
                     ) : (
                       <div className="bg-danger p-2 col-12">
                         <p className="text-white text-center text-sm-start">
-                          Ainda não foi entregue
+                          Aguardando entrega.
                         </p>
                       </div>
                     )}
@@ -185,8 +183,8 @@ const OrderScreen = ({ match }) => {
                           <h6>{item.qty}</h6>
                         </div>
                         <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
-                          <h4>TOTAL</h4>
-                          <h6>${item.qty * item.price}</h6>
+                          <h4>SUBTOTAL</h4>
+                          <h6>R${item.qty * item.price}</h6>
                         </div>
                       </div>
                     ))}
@@ -230,7 +228,8 @@ const OrderScreen = ({ match }) => {
                       <Loading />
                     ) : (
                       <PayPalButton
-                        amount={order.totalPrice}
+                      amount={order.totalPrice}
+                      currency={'BRL'}
                         onSuccess={successPaymentHandler}
                       />
                     )}
@@ -241,6 +240,7 @@ const OrderScreen = ({ match }) => {
           </>
         )}
       </div>
+      {/* TERMINA */}
     </>
   );
 };

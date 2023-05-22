@@ -7,15 +7,16 @@ import { saveShippingAddress } from "../Redux/slices/cartSlice";
 const ShippingScreen = ({ history }) => {
   window.scrollTo(0, 0);
 
+  const initialState = JSON.parse(localStorage.getItem("shippingAddress"));
   const cart = useSelector((state) => state.cart);
 
-  const [street, setStreet] = useState('');
-  const [number, setNumber] = useState('');
-  const [complement, setComplement] = useState('');
-  const [neighborhood, setNeighborhood] = useState('');
-  const [city, setCity] = useState('');
-  const [CEP, setCEP] = useState('');
-  const [country, setCountry] = useState('');
+  let [street, setStreet] = useState(initialState.street);
+  const [number, setNumber] = useState(initialState.number);
+  const [complement, setComplement] = useState(initialState.number);
+  const [neighborhood, setNeighborhood] = useState(initialState.number);
+  const [city, setCity] = useState(initialState.city);
+  const [CEP, setCEP] = useState(initialState.CEP);
+  const [country, setCountry] = useState(initialState.country);
 
   const dispatch = useDispatch();
 

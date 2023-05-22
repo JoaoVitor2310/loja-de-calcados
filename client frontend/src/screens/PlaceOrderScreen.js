@@ -34,8 +34,6 @@ const PlaceOrderScreen = ({ history }) => {
       Number(taxPrice)
     ).toFixed(2);
 
-    // const pricesInfo = {itemsPrice, shippingPrice, taxPrice};
-
   useEffect(() => {
     //Dispatch de preços no carrinho? Por enquanto não precisa
     if (success) {
