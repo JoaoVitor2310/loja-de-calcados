@@ -138,9 +138,7 @@ const OrderScreen = ({ match }) => {
                       <strong>Entrega em</strong>
                     </h5>
                     <p>
-                      Endereço: {order.shippingAddress.city},{" "}
-                      {order.shippingAddress.address},{" "}
-                      {order.shippingAddress.postalCode}
+                      {`${order.shippingAddress.street}, número ${order.shippingAddress.number}, ${order.shippingAddress.neighborhood}, ${order.shippingAddress.city}`}
                     </p>
                     {order.isDelivered ? (
                       <div className="bg-info p-2 col-12">

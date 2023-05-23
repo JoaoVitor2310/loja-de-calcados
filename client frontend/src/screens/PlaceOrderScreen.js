@@ -107,9 +107,8 @@ const PlaceOrderScreen = ({ history }) => {
                   <strong>Entrega em:</strong>
                 </h5>
                 <p>
-                  Endereço: {cart.shippingAddress.city},{" "}
-                  {cart.shippingAddress.address},{" "}
-                  {cart.shippingAddress.CEP}
+                Rua Francisco Paranhos, número 61, Vila Nova, Cabo Frio
+                {/* {`${order.shippingAddress.street}, número ${order.shippingAddress.number}, ${order.shippingAddress.neighborhood}, ${order.shippingAddress.city}`} */}
                 </p>
               </div>
             </div>

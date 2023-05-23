@@ -82,28 +82,28 @@ const SingleProduct = ({ history, match }) => {
 
                   <div className="product-count col-lg-7 ">
                     <div className="flex-box d-flex justify-content-between align-items-center">
-                      <h6>Price</h6>
-                      <span>${product.price}</span>
+                      <h6>Preço</h6>
+                      <span>R${product.price}</span>
                     </div>
                     <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Status</h6>
                       {product.countInStock > 0 ? (
-                        <span>In Stock</span>
+                        <span>Disponível</span>
                       ) : (
-                        <span>unavailable</span>
+                        <span>Indisponível</span>
                       )}
                     </div>
                     <div className="flex-box d-flex justify-content-between align-items-center">
-                      <h6>Reviews</h6>
+                      <h6>Avaliações</h6>
                       <Rating
                         value={product.rating}
-                        text={`${product.numReviews} reviews`}
+                        text={`${product.numReviews} avaliações`}
                       />
                     </div>
                     {product.countInStock > 0 ? (
                       <>
                         <div className="flex-box d-flex justify-content-between align-items-center">
-                          <h6>Quantity</h6>
+                          <h6>Quantidade</h6>
                           <select
                             value={qty}
                             onChange={(e) => setQty(e.target.value)}
@@ -121,7 +121,7 @@ const SingleProduct = ({ history, match }) => {
                           onClick={AddToCartHandle}
                           className="round-black-btn"
                         >
-                          Add To Cart
+                          Adicionar ao Carrinho
                         </button>
                       </>
                     ) : null}
@@ -133,7 +133,7 @@ const SingleProduct = ({ history, match }) => {
             {/* RATING */}
             <div className="row my-5">
               <div className="col-md-6">
-                <h6 className="mb-3">REVIEWS</h6>
+                <h6 className="mb-3">AVALIAÇÕES</h6>
                 {/* {product.reviews.length === 0 && (
                   <Message variant={"alert-info mt-3"}>No Reviews</Message>
                 )} */}
@@ -152,7 +152,7 @@ const SingleProduct = ({ history, match }) => {
                 ))} */}
               </div>
               <div className="col-md-6">
-                <h6>WRITE A CUSTOMER REVIEW</h6>
+                <h6>ESCREVA UMA AVALIAÇÃO CUSTOMIZADA</h6>
                 <div className="my-4">
                   {/* {loadingCreateReview && <Loading />}
                   {errorCreateReview && (

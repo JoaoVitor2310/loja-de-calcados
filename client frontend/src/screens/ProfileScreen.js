@@ -58,7 +58,7 @@ const ProfileScreen = () => {
                     aria-controls="v-pills-home"
                     aria-selected="true"
                   >
-                    Profile Settings
+                    Editar informações do perfil
                   </button>
                   <button
                     className="nav-link d-flex justify-content-between"
@@ -70,7 +70,7 @@ const ProfileScreen = () => {
                     aria-controls="v-pills-profile"
                     aria-selected="false"
                   >
-                    Orders List
+                    Lista de pedidos
                     {/* <span className="badge2">{orders ? orders.length : 0}</span> */}
                   </button>
                 </div>

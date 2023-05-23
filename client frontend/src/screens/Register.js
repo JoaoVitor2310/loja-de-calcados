@@ -71,10 +71,10 @@ const Register = ({ location, history }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          <button type="submit">Register</button>
+          <button type="submit">Registrar</button>
           <p>
             <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-              I Have Account <strong>Login</strong>
+              Já tenho conta.<strong> Fazer login!</strong>
             </Link>
           </p>
         </form>

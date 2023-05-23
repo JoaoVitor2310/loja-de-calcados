@@ -44,7 +44,7 @@ const Header = () => {
           <div className="row">
             <div className="col-md-6 d-flex align-items-center display-none">
               <p>(21) 2222-3333</p>
-              <p>email@tiso.com</p>
+              <p>contato@tiso.com</p>
             </div>
             <div className=" col-12 col-lg-6 justify-content-center justify-content-lg-end d-flex align-items-center">
               <Link to="facebook.com">
